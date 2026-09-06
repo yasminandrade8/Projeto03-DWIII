@@ -1,109 +1,101 @@
-# 🌐 Projeto 03 - DWIII: Verificador de Status Code HTTP (CLI)
+# 🌐 PROJETO 03 – Verificador de Status Code HTTP (CLI em Node.js)
 
-[![Node.js Version](https://img.shields.io/badge/Node.js->=18.0.0-green.svg)](https://nodejs.org/)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-
-Este projeto foi desenvolvido para a disciplina de **Desenvolvimento Web III (DWIII)**. Ele consiste em uma ferramenta de linha de comando (CLI) construída em **Node.js** para realizar requisições HTTP/HTTPS e verificar o *Status Code* de um site fornecido pelo usuário via terminal.
-
-O projeto estende os scripts desenvolvidos em sala de aula no dia **02/09/2026**, mantendo todas as funcionalidades anteriores e adicionando o inicializador customizado para o comando `npm init teste <SITE>`.
+> **Disciplina:** Desenvolvimento Web III (DWIII)  
+> **Linguagem:** JavaScript (Node.js)  
+> **Conceitos:** CLI / HTTP / NPM Bin / Fetch API  
 
 ---
 
-## 📌 Sumário
+## 📌 Sobre o Projeto
 
-- [Recursos](#-recursos)
-- [Prerequisites](#-pré-requisitos)
-- [Instalação e Configuração Local](#-instalação-e-configuração-local)
-- [Como Usar](#-como-usar)
-- [Exemplos de Uso](#-exemplos-de-uso)
-- [Tratamento de Erros](#-tratamento-de-erros)
-- [Estrutura do Projeto](#-estrutura-do-projeto)
-- [Tecnologias Utilizadas](#-tecnologias-utilizadas)
-- [Autores](#-autores)
+Este projeto foi desenvolvido para a disciplina de **Desenvolvimento Web III (DWIII)**, estendendo as atividades realizadas em sala de aula no dia **02/09/2026**.
+
+O objetivo principal é a criação de uma ferramenta de linha de comando (CLI) construída em **Node.js**, executada diretamente pelo terminal, para verificar o *Status Code HTTP* de qualquer site fornecido pelo usuário através do comando customizado `npm init teste <SITE>`. O projeto foi estruturado de forma incremental, mantendo todos os scripts e utilitários criados nas aulas passadas.
 
 ---
 
-## ✨ Recursos
+## 🎯 Funcionalidades do CLI
 
-- 🚀 **Execução via CLI nativa do NPM**: Permite a chamada com o comando `npm init teste <URL>`.
-- 🔍 **Consulta de Status Code HTTP/HTTPS**: Exibe a URL acessada e a resposta do servidor (ex: `200 - OK`, `404 - Not Found`).
-- 🛡️ **Tratamento de Erros Robusto**: Lida com falta de argumentos, URLs malformadas, indisponibilidade de servidor e falhas de rede.
-- 📦 **Preservação de Scripts Anteriores**: Mantém intactos os scripts e utilitários criados nas aulas passadas.
+- **Execução Nativa via NPM:** Permite consultar sites utilizando a sintaxe `npm init teste <SITE>`.
+- **Tratamento Automático de Protocolo:** Adiciona automaticamente o prefixo `https://` caso o usuário digite o endereço sem o protocolo (ex: `github.com`).
+- **Verificação de Status HTTP/HTTPS:** Realiza requisições assíncronas e exibe a URL acessada e a resposta do servidor (ex: `200 - OK`, `404 - Not Found`).
+- **Resiliência e Tratamento de Erros:** Exibe mensagens amigáveis no terminal impedindo a interrupção abrupta do programa em casos de erro de rede ou URLs inválidas.
+- **Preservação de Histórico:** Mantém intactos os demais scripts/CLIs desenvolvidos anteriormente.
 
 ---
 
-## 📋 Pré-requisitos
+## 💻 Estrutura e Funcionamento do Código
 
-Antes de iniciar, certifique-se de ter instalado em sua máquina:
+O projeto está estruturado com foco em simplicidade e utilização de recursos nativos do Node.js:
 
+1. **`status-code.js` (Script Executável):**
+   - Utiliza a *Shebang* (`#!/usr/bin/env node`) para permitir a execução direta pelo interpretador.
+   - Captura os parâmetros informados no terminal através do `process.argv`.
+   - Utiliza a **Fetch API** nativa para realizar as requisições HTTP e capturar os status de resposta.
+
+2. **`package.json` (Mapeamento do CLI):**
+   - Configurado com a chave `"name": "create-teste"` para seguir o padrão do inicializador do `npm init`.
+   - Mapeia o executável CLI através do campo `"bin": { "create-teste": "./status-code.js" }`.
+
+---
+
+## 🚀 Como Instalar e Executar
+
+### Pré-requisitos
 - [Node.js](https://nodejs.org/) (versão **18.0.0** ou superior recomendada).
-- [Git](https://git-scm.com/).
+- [Git](https://git-scm.com/) instalado.
 
----
+### Passo a Passo
 
-## 🔧 Instalação e Configuração Local
-
-Siga o passo a passo abaixo para clonar o repositório e registrar a CLI localmente em seu ambiente.
-
-1. **Clonar o repositório:**
+1. **Clone o repositório:**
    ```bash
    git clone https://github.com/yasminandrade8/Projeto03-DWIII.git
+   ```
+
+2. **Acesse a pasta do projeto:**
+   ```bash
    cd Projeto03-DWIII
    ```
 
-2. **Instalar dependências (caso existam):**
-   ```bash
-   npm install
-   ```
-
-3. **Vincular o pacote CLI localmente com o NPM Link:**
-   Como a CLI utiliza a convenção `npm init teste`, o pacote deve estar registrado globalmente na máquina como `create-teste`. Para isso, execute:
+3. **Registre o comando globalmente via npm link:**
    ```bash
    npm link
    ```
-   *Pronto! O comando `npm init teste` agora está disponível globalmente no seu terminal.*
+
+4. **Execute o comando principal:**
+   ```bash
+   npm init teste https://www.google.com
+   ```
 
 ---
 
-## 🚀 Como Usar
+## 🧪 Exemplos de Execução no Terminal
 
-A sintaxe principal para executar a verificação de um site é:
-
-```bash
-npm init teste <SITE>
-```
-
-> **Nota:** Caso o protocolo (`http://` ou `https://`) não seja informado pelo usuário, o script adicionará automaticamente o prefixo `https://`.
-
----
-
-## 🧪 Exemplos de Uso
-
-### 1. Consulta com sucesso (200 OK)
+### 1. Consulta bem-sucedida (Status 200)
 ```bash
 npm init teste https://www.google.com
 ```
-**Saída no terminal:**
+**Saída:**
 ```text
 Site: https://www.google.com/
 Status Code: 200 - OK
 ```
 
-### 2. Consulta de endereço sem protocolo
+### 2. Consulta simplificada (Sem protocolo)
 ```bash
 npm init teste github.com
 ```
-**Saída no terminal:**
+**Saída:**
 ```text
 Site: https://github.com/
 Status Code: 200 - OK
 ```
 
-### 3. Redirecionamentos ou erros de servidor
+### 3. Página não encontrada (Status 404)
 ```bash
 npm init teste https://httpbin.org/status/404
 ```
-**Saída no terminal:**
+**Saída:**
 ```text
 Site: https://httpbin.org/status/404
 Status Code: 404 - NOT FOUND
@@ -111,47 +103,19 @@ Status Code: 404 - NOT FOUND
 
 ---
 
-## 🛡️ Tratamento de Erros
+## ⚠️ Tratamento de Erros
 
-O programa foi desenvolvido para lidar graciosamente com falhas, exibindo mensagens amigáveis no terminal sem interromper a execução abruptamente com pilhas de erros do Node.js (*unhandled exceptions*).
+O script foi preparado para lidar com cenários de falha comuns e orientar o usuário:
 
-| Cenário de Erro | Comando Executado | Mensagem Exibida no Terminal |
+| Cenário de Erro | Comando Exemplo | Exibição no Terminal |
 | :--- | :--- | :--- |
 | **Site não informado** | `npm init teste` | `❌ Erro: Nenhum site foi informado.`<br>`👉 Uso correto: npm init teste <URL_DO_SITE>` |
-| **URL inválida** | `npm init teste invalid_url_test` | `❌ Erro: O endereço fornecido é uma URL inválida.` |
-| **Falha na Conexão / Servidor Indisponível** | `npm init teste https://site-inexistente-12345.com.br` | `❌ Erro ao conectar com o site: fetch failed`<br>`Verifique sua conexão de rede ou se o endereço está correto.` |
+| **URL malformada/inválida** | `npm init teste teste_invalido` | `❌ Erro: O endereço fornecido é uma URL inválida.` |
+| **Servidor offline / Falha de rede** | `npm init teste https://site-inexistente-123456.com.br` | `❌ Erro ao conectar com o site: fetch failed`<br>`Verifique sua conexão de rede ou se o endereço está correto.` |
 
 ---
 
-## 📁 Estrutura do Projeto
-
-A estrutura de arquivos do projeto garante a convivência entre as tarefas anteriores e o novo recurso de CLI:
-
-```text
-Projeto03-DWIII/
-├── status-code.js         # Script principal da CLI de consulta de Status Code
-├── package.json           # Configuração do pacote (contendo "name": "create-teste" e "bin")
-├── README.md              # Documentação oficial do projeto
-└── ...                    # Demais scripts e arquivos desenvolvidos na aula de 02/09/2026
-```
-
+## 👩‍💻 Autora
+Feito com 💜 por Yasmin Andrade
 ---
-
-## 🛠️ Tecnologias Utilizadas
-
-- **[Node.js](https://nodejs.org/)**: Ambiente de execução JavaScript no servidor.
-- **Fetch API (Nativa)**: Para realização de requisições HTTP/HTTPS assíncronas.
-- **NPM Bin / Link**: Para criação do executável no terminal do sistema operacional.
-
----
-
-## 👥 Autores
-
-Trabalho desenvolvido em dupla para a disciplina de **Desenvolvimento Web III**:
-
-- **Yasmin Andrade** - [@yasminandrade8](https://github.com/yasminandrade8)
-- **Integrante da Dupla** - Nome e link do GitHub do colega
-
----
-
-*Projeto entregue em conformidade com as orientações do dia 02/09/2026.*
+*Projeto entregue em conformidade com as orientações da aula do dia 02/09/2026.*

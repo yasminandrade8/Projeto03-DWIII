@@ -81,17 +81,7 @@ Site: https://www.google.com/
 Status Code: 200
 ```
 
-### 2. Consulta simplificada (Sem protocolo)
-```bash
-npm init teste github.com
-```
-**Saída:**
-```text
-Site: https://github.com/
-Status Code: 200
-```
-
-### 3. Página não encontrada (Status 404)
+### 2. Página não encontrada (Status 404)
 ```bash
 npm init teste https://httpbin.org/status/404
 ```

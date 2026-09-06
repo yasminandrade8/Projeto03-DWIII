@@ -1,0 +1,29 @@
+{
+  "name": "projeto03-dwiii",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "cli": "node cli.js ./arquivos/texto.md",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yasminandrade8/Projeto03-DWIII.git"
+  },
+  "keywords": [],
+  "author": "Yasmin Andrade",
+  "license": "ISC",
+  "type": "module",
+  "bin": {
+    "create-teste": "./statusCode.js"
+  },
+  "bugs": {
+    "url": "https://github.com/yasminandrade8/Projeto03-DWIII/issues"
+  },
+  "homepage": "https://github.com/yasminandrade8/Projeto03-DWIII#readme",
+  "dependencies": {
+    "chalk": "^6.0.0",
+    "node-fetch": "^3.3.2"
+  }
+}

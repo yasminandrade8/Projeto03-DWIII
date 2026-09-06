@@ -78,7 +78,7 @@ npm init teste https://www.google.com
 **Saída:**
 ```text
 Site: https://www.google.com/
-Status Code: 200 - OK
+Status Code: 200
 ```
 
 ### 2. Consulta simplificada (Sem protocolo)
@@ -88,7 +88,7 @@ npm init teste github.com
 **Saída:**
 ```text
 Site: https://github.com/
-Status Code: 200 - OK
+Status Code: 200
 ```
 
 ### 3. Página não encontrada (Status 404)
@@ -98,7 +98,7 @@ npm init teste https://httpbin.org/status/404
 **Saída:**
 ```text
 Site: https://httpbin.org/status/404
-Status Code: 404 - NOT FOUND
+Status Code: 404 
 ```
 
 ---
@@ -117,5 +117,3 @@ O script foi preparado para lidar com cenários de falha comuns e orientar o usu
 
 ## 👩‍💻 Autora
 Feito com 💜 por Yasmin Andrade
----
-*Projeto entregue em conformidade com as orientações da aula do dia 02/09/2026.*
